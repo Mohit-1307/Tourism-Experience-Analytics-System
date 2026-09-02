@@ -373,7 +373,7 @@ st.markdown(
         padding: 2rem 0 0.5rem 0;
     }}
 
-    /* ── Radio buttons — accent colour in both themes ──────────────────────── */
+    /* Radio buttons — accent colour in both themes */
     [data-baseweb="radio"] [data-checked="true"] div,
     [data-baseweb="radio"] div[aria-checked="true"] {{
         background-color: var(--accent) !important;
@@ -387,7 +387,7 @@ st.markdown(
         color: var(--text-0) !important;
     }}
 
-    /* ── Slider — accent track and thumb ───────────────────────────────────── */
+    /* Slider — accent track and thumb */
     [data-testid="stSlider"] [role="slider"] {{
         background-color: var(--accent) !important;
         border-color:     var(--accent) !important;
@@ -397,7 +397,7 @@ st.markdown(
     }}
     [data-testid="stSlider"] p {{ color: var(--text-0) !important; }}
 
-    /* ── All widget labels ──────────────────────────────────────────────────── */
+    /* All widget labels */
     label, [data-testid="stWidgetLabel"] p,
     .stSelectbox label, .stNumberInput label,
     .stSlider label, .stRadio label,
@@ -406,7 +406,7 @@ st.markdown(
         font-size: 0.85rem !important;
     }}
 
-    /* ── Number input stepper buttons ───────────────────────────────────────── */
+    /* Number input stepper buttons */
     [data-testid="stNumberInput"] button {{
         background: var(--bg-2)  !important;
         border-color: var(--line) !important;
@@ -417,7 +417,7 @@ st.markdown(
         color: var(--accent)        !important;
     }}
 
-    /* ── Selectbox dropdown list ────────────────────────────────────────────── */
+    /* Selectbox dropdown list */
     [data-baseweb="select"] ul {{
         background: var(--bg-2) !important;
         border: 1px solid var(--line) !important;
@@ -429,7 +429,7 @@ st.markdown(
         background: var(--accent-dim) !important;
     }}
 
-    /* ── Expander ───────────────────────────────────────────────────────────── */
+    /* Expander */
     [data-testid="stExpander"] {{
         background: var(--bg-2) !important;
         border: 1px solid var(--line) !important;
@@ -437,17 +437,17 @@ st.markdown(
     }}
     [data-testid="stExpander"] summary {{ color: var(--text-0) !important; }}
 
-    /* ── Caption / small text ───────────────────────────────────────────────── */
+    /* Caption / small text */
     [data-testid="stCaptionContainer"] p,
     .stCaption p {{ color: var(--text-2) !important; }}
 
-    /* ── Tab bar ────────────────────────────────────────────────────────────── */
+    /* Tab bar */
     [data-baseweb="tab"] button,
     [data-baseweb="tab"] span {{ color: var(--text-1) !important; }}
     [data-baseweb="tab"][aria-selected="true"] button,
     [data-baseweb="tab"][aria-selected="true"] span {{ color: var(--accent) !important; }}
 
-    /* ── Download button ────────────────────────────────────────────────────── */
+    /* Download button */
     [data-testid="stDownloadButton"] button {{
         background: transparent        !important;
         border: 1px solid var(--accent) !important;
@@ -458,18 +458,18 @@ st.markdown(
         color: var(--accent-ink)   !important;
     }}
 
-    /* ── Dataframe ──────────────────────────────────────────────────────────── */
+    /* Dataframe */
     [data-testid="stDataFrame"] * {{ color: var(--text-0) !important; }}
     [data-testid="stDataFrame"] th {{ background: var(--bg-1) !important; }}
     [data-testid="stDataFrame"] td {{ background: var(--bg-2) !important; }}
 
-    /* ── Alert / error / warning boxes ─────────────────────────────────────── */
+    /* Alert / error / warning boxes */
     [data-testid="stAlert"] {{
         background: var(--bg-2) !important;
         color: var(--text-0)    !important;
     }}
 
-    /* ── Scrollbar ──────────────────────────────────────────────────────────── */
+    /* Scrollbar */
     ::-webkit-scrollbar              {{ width: 6px; height: 6px; }}
     ::-webkit-scrollbar-track        {{ background: var(--bg-1); }}
     ::-webkit-scrollbar-thumb        {{ background: var(--line); border-radius: 3px; }}
@@ -678,7 +678,7 @@ def stat_card(label, value, delta=None):
     )
 
 
-# ── Sidebar ───────────────────────────────────────────────────────────────────
+# Sidebar
 st.sidebar.markdown(
     f"""
     <div style="padding: 0.4rem 0 1.2rem 0;">
@@ -751,7 +751,7 @@ st.sidebar.markdown(
     unsafe_allow_html=True,
 )
 
-# ── HOME ──────────────────────────────────────────────────────────────────────
+# HOME
 if page == "Home":
 
     st.markdown(
@@ -849,7 +849,7 @@ if page == "Home":
                 unsafe_allow_html=True,
             )
 
-# ── EDA EXPLORER ──────────────────────────────────────────────────────────────
+# EDA EXPLORER
 elif page == "EDA Explorer":
 
     st.markdown(
@@ -1100,7 +1100,7 @@ elif page == "EDA Explorer":
                 )
                 st.plotly_chart(fig, use_container_width=True)
 
-# ── RATING PREDICTOR ──────────────────────────────────────────────────────────
+# RATING PREDICTOR
 elif page == "Rating Predictor":
 
     st.markdown('<span class="eyebrow">module 01</span>', unsafe_allow_html=True)
@@ -1309,7 +1309,7 @@ elif page == "Rating Predictor":
             except Exception as e:
                 st.error(f"Prediction failed — {e}")
 
-# ── MODE PREDICTOR ────────────────────────────────────────────────────────────
+# MODE PREDICTOR
 elif page == "Mode Predictor":
 
     st.markdown('<span class="eyebrow">module 02</span>', unsafe_allow_html=True)
@@ -1532,7 +1532,7 @@ elif page == "Mode Predictor":
             except Exception as e:
                 st.error(f"Prediction failed — {e}")
 
-# ── RECOMMENDATIONS ───────────────────────────────────────────────────────────
+# RECOMMENDATIONS
 elif page == "Recommendations":
 
     st.markdown('<span class="eyebrow">module 03</span>', unsafe_allow_html=True)
@@ -1768,7 +1768,7 @@ elif page == "Recommendations":
                 except Exception as e:
                     st.error(f"Error — {e}")
 
-# ── MODEL PERFORMANCE ─────────────────────────────────────────────────────────
+# MODEL PERFORMANCE
 elif page == "Model Performance":
 
     st.markdown('<span class="eyebrow">evaluation</span>', unsafe_allow_html=True)
