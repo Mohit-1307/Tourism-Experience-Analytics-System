@@ -9,6 +9,7 @@ import numpy as np
 import joblib
 import plotly.express as px
 import plotly.graph_objects as go
+import logging
 
 st.set_page_config(
     page_title="Tourism Analytics",
@@ -582,14 +583,17 @@ def load_models():
         reg_model = joblib.load("models/best_regression_model.pkl")
         reg_scaler = joblib.load("models/regression_scaler.pkl")
         use_sc_reg = joblib.load("models/use_sc_reg.pkl")
+
         clf_model = joblib.load("models/best_classification_model.pkl")
         clf_scaler = joblib.load("models/classification_scaler.pkl")
         le_mode = joblib.load("models/label_encoder_mode.pkl")
         use_sc_clf = joblib.load("models/use_sc_clf.pkl")
+
         collab_sim = joblib.load("models/collab_similarity.pkl")
         content_sim = joblib.load("models/content_similarity.pkl")
         uim = joblib.load("models/user_item_matrix.pkl")
         meta = joblib.load("models/feature_meta.pkl")
+
         return (
             reg_model,
             reg_scaler,
@@ -603,7 +607,9 @@ def load_models():
             uim,
             meta,
         ), True
-    except Exception as e:
+
+    except Exception:
+        logging.exception("Model loading failed")
         return None, False
 
 
@@ -1854,16 +1860,25 @@ elif page == "Model Performance":
             clf_res = meta.get("clf_results", [])
             if clf_res:
                 cdf = pd.DataFrame(clf_res).sort_values("F1", ascending=False)
-                best = meta.get("best_clf_name", "")
+                # Best benchmark model = highest weighted F1
                 bc = cdf.iloc[0]
 
+                # Deployment model = model selected for Streamlit deployment
+                deployment_name = meta.get("best_clf_name", "")
+                deployment_rows = cdf[cdf["Model"] == deployment_name]
+                dc = deployment_rows.iloc[0] if not deployment_rows.empty else None
+
                 m1, m2, m3, m4 = st.columns(4)
+
                 with m1:
-                    stat_card("Best Model", bc["Model"][:14])
+                    stat_card("Best Benchmark", bc["Model"][:14])
+
                 with m2:
                     stat_card("Accuracy", f"{bc['Accuracy']:.4f}")
+
                 with m3:
                     stat_card("F1 (Weighted)", f"{bc['F1']:.4f}")
+
                 with m4:
                     stat_card("Precision", f"{bc['Precision']:.4f}")
 
