@@ -20,4 +20,3 @@ venv.bak/
 */.ipynb_checkpoints/*
 images/
 data/
-models/best_classification_model.pkl
