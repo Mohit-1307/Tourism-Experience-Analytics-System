@@ -12,36 +12,10 @@ import plotly.graph_objects as go
 import logging
 
 
-
-
-
-
-
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_DIR = BASE_DIR / "models"
-
-print("=" * 60)
-print("DEBUG MODEL PATH")
-print("BASE_DIR:", BASE_DIR)
-print("MODEL_DIR:", MODEL_DIR)
-print("MODEL_DIR exists:", MODEL_DIR.exists())
-print(
-    "Classification model exists:",
-    (MODEL_DIR / "best_classification_model.pkl").exists(),
-)
-
-if MODEL_DIR.exists():
-    print("Files inside models/:")
-    for file in MODEL_DIR.iterdir():
-        print(" -", file.name, file.stat().st_size, "bytes")
-
-print("=" * 60)
-
-
-
-
 
 
 st.set_page_config(
@@ -609,23 +583,54 @@ MODE_INFO = {
 }
 
 
+print("=" * 70)
+print("MODEL DEPLOYMENT DIAGNOSTIC")
+print("Current working directory:", Path.cwd())
+print("app.py location:", Path(__file__).resolve())
+print("BASE_DIR:", BASE_DIR)
+print("MODEL_DIR:", MODEL_DIR)
+print("MODEL_DIR exists:", MODEL_DIR.exists())
+
+if MODEL_DIR.exists():
+    print("Files in models/:")
+    for p in MODEL_DIR.iterdir():
+        print(f"  {p.name} -> {p.stat().st_size:,} bytes")
+
+classification_path = MODEL_DIR / "best_classification_model.pkl"
+
+print("Classification model exists:", classification_path.exists())
+
+if classification_path.exists():
+    print("Classification model size:", classification_path.stat().st_size, "bytes")
+
+print("=" * 70)
+
+
 @st.cache_resource
 def load_models():
     """Load all saved model artifacts from models/ folder."""
     try:
-        reg_model = joblib.load("models/best_regression_model.pkl")
-        reg_scaler = joblib.load("models/regression_scaler.pkl")
-        use_sc_reg = joblib.load("models/use_sc_reg.pkl")
+        reg_model = joblib.load(MODEL_DIR / "best_regression_model.pkl")
 
-        clf_model = joblib.load("models/best_classification_model.pkl")
-        clf_scaler = joblib.load("models/classification_scaler.pkl")
-        le_mode = joblib.load("models/label_encoder_mode.pkl")
-        use_sc_clf = joblib.load("models/use_sc_clf.pkl")
+        reg_scaler = joblib.load(MODEL_DIR / "regression_scaler.pkl")
 
-        collab_sim = joblib.load("models/collab_similarity.pkl")
-        content_sim = joblib.load("models/content_similarity.pkl")
-        uim = joblib.load("models/user_item_matrix.pkl")
-        meta = joblib.load("models/feature_meta.pkl")
+        use_sc_reg = joblib.load(MODEL_DIR / "use_sc_reg.pkl")
+
+        clf_model = joblib.load(MODEL_DIR / "best_classification_model.pkl")
+
+        clf_scaler = joblib.load(MODEL_DIR / "classification_scaler.pkl")
+
+        le_mode = joblib.load(MODEL_DIR / "label_encoder_mode.pkl")
+
+        use_sc_clf = joblib.load(MODEL_DIR / "use_sc_clf.pkl")
+
+        collab_sim = joblib.load(MODEL_DIR / "collab_similarity.pkl")
+
+        content_sim = joblib.load(MODEL_DIR / "content_similarity.pkl")
+
+        uim = joblib.load(MODEL_DIR / "user_item_matrix.pkl")
+
+        meta = joblib.load(MODEL_DIR / "feature_meta.pkl")
 
         return (
             reg_model,
