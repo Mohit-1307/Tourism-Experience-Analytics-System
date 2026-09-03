@@ -11,6 +11,39 @@ import plotly.express as px
 import plotly.graph_objects as go
 import logging
 
+
+
+
+
+
+
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "models"
+
+print("=" * 60)
+print("DEBUG MODEL PATH")
+print("BASE_DIR:", BASE_DIR)
+print("MODEL_DIR:", MODEL_DIR)
+print("MODEL_DIR exists:", MODEL_DIR.exists())
+print(
+    "Classification model exists:",
+    (MODEL_DIR / "best_classification_model.pkl").exists(),
+)
+
+if MODEL_DIR.exists():
+    print("Files inside models/:")
+    for file in MODEL_DIR.iterdir():
+        print(" -", file.name, file.stat().st_size, "bytes")
+
+print("=" * 60)
+
+
+
+
+
+
 st.set_page_config(
     page_title="Tourism Analytics",
     page_icon="assets/logo.svg" if False else "✈️",
